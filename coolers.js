@@ -48,7 +48,7 @@ function setup(){
     createCanvas(1920,1080);
     textFont(content);
     noStroke();
-    const slotW = width / COLS;
+    const slotW = 1920 / COLS;
   const slotH = height;
 
   for (let i = 0; i < COLS; i++) {
