@@ -18,11 +18,10 @@ function setup() {
     textStyle(BOLD);
     noStroke();
 
-    // 버튼 위치 설정 (중앙 하단)
     buttonW = 180;
     buttonH = 60;
     buttonX = width / 2 - buttonW / 2;
-    buttonY = height * 0.75;
+    buttonY = height * 0.65;
 }
 
 function draw() {
@@ -50,7 +49,7 @@ function draw() {
     textSize(32);
     textAlign(LEFT, TOP);
     textFont(content);
-    text('\n예술적으로\n\n로고를 만들고 싶으시다면?\n\n지금 당장 시작하세요', 40, 60);
+    text('\n예술적으로\n\n로고를 만들고 싶으시다면?\n\n지금 당장 시작하세요', 180, 60);
 
     // 버튼 렌더링
     drawButton();

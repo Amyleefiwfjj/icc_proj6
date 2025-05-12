@@ -63,10 +63,11 @@
 <body>
     <header>Press spacebar to generate color palettes</header>
     <script>
+    let condition = 0;//0은 잠금 열림 상태
     function preload(){
         Logo = loadFont('./asset/logo.ttf');
         content = loadFont('./asset/content.otf');
-        lock = loadImage('./asset/lock.png');
+        Locker = loadImage('./asset/lock.png');
         Open = loadImage('./asset/open.png');
     }    
     function setup(){
@@ -76,6 +77,16 @@
     }
     function draw(){
         background(255);
+        for(i=0;i<5;i++)
+    {
+        
+    }
+
+    }
+    function lock(){
+        
+    }
+    function spaceBarPressed(){
 
     }
     </script>
