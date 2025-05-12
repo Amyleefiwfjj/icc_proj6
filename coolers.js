@@ -63,12 +63,18 @@ function mousePressed() {
     for (const s of slots) {
         if (s.contains(mouseX, mouseY)) {
             s.lockerToggle();
+            exportPalette();
             break;
         }
     }
 }
 function keyPressed() {
     if (keyCode === ENTER || key === ' ') {   // ← 스페이스(공백 문자)도 허용
-        for (const s of slots) s.regenerate();
+        for (const s of slots) { s.regenerate(); exportPalette(); }
     }
+}
+function exportPalette() {
+    // 슬롯 색상을 “#A1B2C3” 형식으로 추출
+    const hexArr = slots.map(s => s.color.toString('#rrggbb').toUpperCase());
+    localStorage.setItem('paletteColors', JSON.stringify(hexArr));
 }

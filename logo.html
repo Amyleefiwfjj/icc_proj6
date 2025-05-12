@@ -2,67 +2,152 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Figma-like Design Tool (p5.js)</title>
-
-    <!-- p5.js 라이브러리 -->
+    <meta charset="UTF-8" />
+    <title>Design Tool — Font · Size · Palette</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 
     <style>
-        body {
-            margin: 0;
-            display: flex;
-            font-family: Arial, sans-serif;
+        :root {
+            --brand: #007bff;
+            --brand-dark: #0056d2;
+            --accent: #28a745;
+            --toolbar-w: 260px;
         }
 
-        #toolbar {
-            width: 200px;
-            padding: 20px;
-            background: #f0f0f0;
+        * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0
         }
 
-        #canvas-container {
-            flex: 1;
+        body {
+            display: flex;
+            height: 100vh;
+            font-family: Arial, system-ui;
+            overflow: hidden;
+            background: #f8f9fa
+        }
+
+        /* --- toolbar --- */
+        #toolbar {
+            width: var(--toolbar-w);
+            background: #fff;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 18px;
+            gap: 14px;
+            box-shadow: 2px 0 4px rgb(0 0 0 / .04);
+            z-index: 10;
         }
 
         .btn {
             display: block;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--brand);
             color: #fff;
-            background: #007bff;
+            text-align: center;
             cursor: pointer;
-            user-select: none;
+            transition: .15s;
+            user-select: none
         }
 
         .btn:hover {
-            background: #0056d2;
+            background: var(--brand-dark)
         }
 
         .btn.active {
-            background: #28a745;
+            background: var(--accent) !important
         }
 
-        /* 현재 선택 중인 툴 표시 */
+        select.btn,
+        input.btn {
+            background: #fff;
+            color: #000;
+            border: 1px solid #ced4da
+        }
+
+        select.btn {
+            padding-right: 32px
+        }
+
+        /* --- palette --- */
+        #palette {
+            display: grid;
+            grid-template-columns: repeat(5, 42px);
+            gap: 8px;
+            margin-top: 6px
+        }
+
+        .slot {
+            width: 42px;
+            height: 42px;
+            border-radius: 6px;
+            border: 2px solid #fff;
+            cursor: pointer;
+            transition: .15s
+        }
+
+        .slot:hover {
+            transform: scale(1.08)
+        }
+
+        .slot.active {
+            border-color: #000
+        }
+
+        /* --- canvas --- */
+        #canvas-container {
+            flex: 1;
+            position: relative
+        }
+
+        canvas {
+            display: block
+        }
+
+        /* --- subtle scroll for toolbar (if needed) --- */
+        #toolbar::-webkit-scrollbar {
+            width: 6px
+        }
+
+        #toolbar::-webkit-scrollbar-thumb {
+            background: #c4c4c4;
+            border-radius: 3px
+        }
     </style>
 </head>
 
 <body>
-    <!-- 툴바 -->
-    <div id="toolbar">
+    <!-- toolbar -->
+    <aside id="toolbar">
+        <h3 style="font-size:18px;margin-bottom:6px;color:#343a40;">TOOLS</h3>
+
         <div class="btn active" data-tool="select">선택 (V)</div>
         <div class="btn" data-tool="circle">원 (C)</div>
         <div class="btn" data-tool="rect">사각형 (R)</div>
         <div class="btn" data-tool="text">텍스트 (T)</div>
-    </div>
 
-    <!-- p5.js 캔버스 -->
+        <h3 style="font-size:18px;margin:14px 0 6px;color:#343a40;">TEXT</h3>
+        <select id="fontSelect" class="btn">
+            <option value="1">Font 1</option>
+            <option value="2">Font 2</option>
+            <option value="3">Font 3</option>
+            <option value="4">Font 4</option>
+            <option value="5">Font 5</option>
+            <option value="6">Font 6</option>
+        </select>
+        <input id="fontSize" type="number" class="btn" value="20" min="8" max="100" />
+
+        <h3 style="font-size:18px;margin:14px 0 6px;color:#343a40;">PALETTE</h3>
+        <div id="palette"></div>
+    </aside>
+
+    <!-- p5 canvas -->
     <div id="canvas-container"></div>
 
-    <!-- 실제 p5 코드 -->
     <script src="logo.js"></script>
 </body>
 

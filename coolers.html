@@ -48,10 +48,23 @@
             color: #fff;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-family: 'content', sans-serif;
+            justify-content: space-between;
+            padding: 0 20px;
             z-index: 1000;
+        }
+
+        header button {
+            padding: 8px 16px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        header button:hover {
+            background: #0056d2;
         }
 
         canvas {
@@ -61,8 +74,20 @@
 </head>
 
 <body>
-    <header>Press spacebar to generate color palettes</header>
-    <script src="./coolers.js">    </script>
+    <header>
+        <span>Press spacebar to generate color palettes</span>
+        <button onclick="goToLogoPage()">Go to Logo Maker</button>
+    </header>
+
+    <script src="./coolers.js"></script>
+    <script>
+        function goToLogoPage() {
+            // 팔레트 색상 저장
+            const hexArr = slots.map(s => s.color.toString('#rrggbb').toUpperCase());
+            localStorage.setItem('paletteColors', JSON.stringify(hexArr));
+            window.location.href = './logo.html';
+        }
+    </script>
 </body>
 
 </html>
