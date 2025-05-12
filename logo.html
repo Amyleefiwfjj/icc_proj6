@@ -1,54 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 
 <head>
-    <title>Figma-like Design Tool with p5.js</title>
+    <meta charset="UTF-8">
+    <title>Figma-like Design Tool (p5.js)</title>
+
+    <!-- p5.js 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             display: flex;
+            font-family: Arial, sans-serif;
         }
 
-        #ui {
+        #toolbar {
             width: 200px;
             padding: 20px;
             background: #f0f0f0;
+            box-sizing: border-box;
         }
 
         #canvas-container {
             flex: 1;
-            position: relative;
         }
 
-        .shape-button {
+        .btn {
             display: block;
             margin: 10px 0;
             padding: 10px;
-            background: #007bff;
-            color: #fff;
-            text-align: center;
-            cursor: pointer;
             border-radius: 5px;
+            text-align: center;
+            color: #fff;
+            background: #007bff;
+            cursor: pointer;
+            user-select: none;
         }
 
-        .shape-button:hover {
+        .btn:hover {
             background: #0056d2;
         }
+
+        .btn.active {
+            background: #28a745;
+        }
+
+        /* 현재 선택 중인 툴 표시 */
     </style>
 </head>
 
 <body>
-    <div id="ui">
-        <div class="shape-button" onclick="selectShape('circle')">Circle</div>
-        <div class="shape-button" onclick="selectShape('rectangle')">Rectangle</div>
+    <!-- 툴바 -->
+    <div id="toolbar">
+        <div class="btn active" data-tool="select">선택 (V)</div>
+        <div class="btn" data-tool="circle">원 (C)</div>
+        <div class="btn" data-tool="rect">사각형 (R)</div>
     </div>
-    <div id="canvas-container">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-        <script src="./logo.js">
 
-        </script>
-    </div>
+    <!-- p5.js 캔버스 -->
+    <div id="canvas-container"></div>
+
+    <!-- 실제 p5 코드 -->
+    <script src="logo.js"></script>
 </body>
 
 </html>
