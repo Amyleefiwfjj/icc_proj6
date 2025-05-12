@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Make your color palette</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'logo';
+            font-weight: 700;
+            src: url('./asset/logo.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'logo1';
+            font-weight: 700;
+            src: url('./asset/logo1.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'content';
+            font-weight: 700;
+            src: url('./asset/content.otf') format('opentype');
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: 'content', sans-serif;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-family: 'content', sans-serif;
+            z-index: 1000;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>Press spacebar to generate color palettes</header>
+    <script>    </script>
+</body>
+
+</html>
