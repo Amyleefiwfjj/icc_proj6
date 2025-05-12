@@ -35,6 +35,10 @@
         }
 
         body {
+            margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
             overflow: hidden;
             font-family: 'content', sans-serif;
         }
@@ -64,77 +68,7 @@
 
 <body>
     <header>Make your own logo</header>
-
-    <script>
-        let offset = 0;
-        const STEP = 2;
-        const GAP_X = 240, GAP_Y = 120;
-        const ANGLE = Math.PI / 6;
-        function preload() {
-            Logo = loadFont('./asset/logo.ttf');
-            Logo1 = loadFont('./asset/logo1.ttf');
-            content = loadFont('./asset/content.otf');
-        }
-        function setup() {
-            createCanvas(1920, 1080);
-            textFont('sans-serif');
-            textStyle(BOLD);
-            noStroke();
-        }
-
-        function draw() {
-            background(255);
-
-            push();
-            translate(offset, offset);
-            fill(100);
-            textSize(64);
-            for (let y = -GAP_Y * 2; y < height + GAP_Y * 2; y += GAP_Y) {
-                for (let x = -GAP_X * 2; x < width + GAP_X * 2; x += GAP_X) {
-                    push();
-                    translate(x, y);
-                    rotate(ANGLE);
-                    textFont(Logo);
-                    text('LOGO', 0, 0);
-                    pop();
-                }
-            }
-            pop();
-
-            offset = (offset + STEP) % Math.max(GAP_X, GAP_Y);
-
-            fill(0);
-            textSize(32);
-            textAlign(LEFT, TOP);
-            textFont(content);
-            text('\n예술적으로\n\n로고를 만들고 싶으시다면?\n\n지금 당장 시작하세요', 40, 60);
-
-            const w = 180, h = 60;
-            const x = width / 2 - w / 2;
-            const y = height * 0.75;
-
-            fill(0, 0, 0, 40);
-            rect(x + 4, y + 4, w, h, 8);
-
-            fill(120);
-            rect(x, y, w, h, 8);
-
-            fill(255);
-            textSize(28);
-            textAlign(CENTER, CENTER);
-            text('시작하기', x + w / 2, y + h / 2);
-        }
-
-        function mousePressed() {
-            const w = 180, h = 60;
-            const x = width / 2 - w / 2;
-            const y = height * 0.75;
-            if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
-                console.log('버튼 클릭!');
-            }
-        }
-
-    </script>
+    <script src="./main.js"></script>
 </body>
 
 </html>

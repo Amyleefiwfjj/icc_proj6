@@ -62,7 +62,23 @@
 
 <body>
     <header>Press spacebar to generate color palettes</header>
-    <script>    </script>
+    <script>
+    function preload(){
+        Logo = loadFont('./asset/logo.ttf');
+        content = loadFont('./asset/content.otf');
+        lock = loadImage('./asset/lock.png');
+        Open = loadImage('./asset/open.png');
+    }    
+    function setup(){
+        createCanvas(1920,1080);
+        textFont(content);
+        noStroke();
+    }
+    function draw(){
+        background(255);
+
+    }
+    </script>
 </body>
 
 </html>
