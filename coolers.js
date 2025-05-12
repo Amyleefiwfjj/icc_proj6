@@ -37,7 +37,7 @@ class PaletteSlot {
         textSize(24);
         textFont(content);
         const hexString = this.color.toString('#rrggbb').substring(1).toUpperCase();
-        text(hexString, this.x + this.w / 2, height - 20);
+        text(hexString, this.x + this.w / 2, height - 120);
 
         imageMode(CENTER);
         const icon = this.locked ? imgLock : imgOpen;

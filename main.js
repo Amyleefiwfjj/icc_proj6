@@ -49,25 +49,23 @@ function draw() {
     textSize(32);
     textAlign(LEFT, TOP);
     textFont(content);
-    text('\n예술적으로\n\n로고를 만들고 싶으시다면?\n\n지금 당장 시작하세요', 180, 60);
+    text('\n예술적으로\n\n로고를 만들고 싶으시다면?\n\n지금 당장 시작하세요', 360, 60);
 
-    // 버튼 렌더링
     drawButton();
 }
 
 function drawButton() {
-    // 버튼 배경
     fill(0, 0, 0, 40);
-    rect(buttonX + 4, buttonY + 4, buttonW, buttonH, 8);
+    rect(buttonX + 4, buttonY - 150, buttonW, buttonH, 8);
 
     fill(120);
-    rect(buttonX, buttonY, buttonW, buttonH, 8);
+    rect(buttonX, buttonY - 150, buttonW, buttonH, 8);
 
     // 버튼 텍스트
     fill(255);
     textSize(28);
     textAlign(CENTER, CENTER);
-    text('시작하기', buttonX + buttonW / 2, buttonY + buttonH / 2);
+    text('시작하기', buttonX + buttonW / 2, buttonY + buttonH / 2 - 150);
 }
 
 // 마우스 클릭 감지
@@ -75,8 +73,8 @@ function mousePressed() {
     if (
         mouseX > buttonX &&
         mouseX < buttonX + buttonW &&
-        mouseY > buttonY &&
-        mouseY < buttonY + buttonH
+        mouseY > buttonY - 150 &&
+        mouseY < buttonY - 150 + buttonH
     ) {
         gotoNextPage();
     }

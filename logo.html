@@ -3,15 +3,21 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Design Tool — Font · Size · Palette</title>
+    <title>Logo Maker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-
     <style>
+        /* 기본 reset & 공통 변수 */
         :root {
-            --brand: #007bff;
-            --brand-dark: #0056d2;
-            --accent: #28a745;
-            --toolbar-w: 260px;
+            --clr-bg: #f8f9fa;
+            --clr-border: #e0e0e0;
+            --clr-brand: #2563eb;
+            /* indigo-600 */
+            --clr-brand-h: #1d4ed8;
+            /* hover   */
+            --clr-accent: #10b981;
+            /* emerald */
+            --radius: 10px;
+            --transition: .2s cubic-bezier(.25, .8, .25, 1);
         }
 
         * {
@@ -20,65 +26,86 @@
             padding: 0
         }
 
+        html,
         body {
-            display: flex;
-            height: 100vh;
-            font-family: Arial, system-ui;
-            overflow: hidden;
-            background: #f8f9fa
+            height: 100%
         }
 
-        /* --- toolbar --- */
-        #toolbar {
-            width: var(--toolbar-w);
-            background: #fff;
-            border-right: 1px solid #e0e0e0;
+        body {
             display: flex;
-            flex-direction: column;
-            padding: 20px 18px;
-            gap: 14px;
-            box-shadow: 2px 0 4px rgb(0 0 0 / .04);
-            z-index: 10;
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--clr-bg);
+            color: var(--clr-text);
+            overflow: hidden;
+        }
+
+        /* 유틸 */
+        .flex-col {
+            display: flex;
+            flex-direction: column
+        }
+
+        .flex-grow {
+            flex: 1
+        }
+
+        .shadow-sm {
+            box-shadow: 0 2px 4px rgb(0 0 0/.05)
         }
 
         .btn {
-            display: block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
             padding: 10px 14px;
-            border-radius: 8px;
+            border-radius: var(--radius);
             font-size: 14px;
-            background: var(--brand);
-            color: #fff;
-            text-align: center;
+            font-weight: 500;
             cursor: pointer;
-            transition: .15s;
-            user-select: none
+            background: var(--clr-brand);
+            color: #fff;
+            border: none;
+            transition: var(--transition);
         }
 
         .btn:hover {
-            background: var(--brand-dark)
+            background: var(--clr-brand-h)
         }
 
         .btn.active {
-            background: var(--accent) !important
+            background: var(--clr-accent) !important
+        }
+
+        .i {
+            font-family: 'lucide';
+            font-style: normal;
+            font-weight: normal;
+            line-height: 1
+        }
+
+
+        #toolbar {
+            width: var(--w-toolbar);
+            background: #fff;
+            border-right: 1px solid #e0e0e0;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px
         }
 
         select.btn,
         input.btn {
             background: #fff;
             color: #000;
-            border: 1px solid #ced4da
+            border: 1px solid #ccc
         }
 
-        select.btn {
-            padding-right: 32px
-        }
-
-        /* --- palette --- */
         #palette {
             display: grid;
             grid-template-columns: repeat(5, 42px);
-            gap: 8px;
-            margin-top: 6px
+            gap: 8px
         }
 
         .slot {
@@ -86,20 +113,14 @@
             height: 42px;
             border-radius: 6px;
             border: 2px solid #fff;
-            cursor: pointer;
-            transition: .15s
-        }
-
-        .slot:hover {
-            transform: scale(1.08)
+            cursor: pointer
         }
 
         .slot.active {
             border-color: #000
         }
 
-        /* --- canvas --- */
-        #canvas-container {
+        #canvas-wrap {
             flex: 1;
             position: relative
         }
@@ -107,30 +128,18 @@
         canvas {
             display: block
         }
-
-        /* --- subtle scroll for toolbar (if needed) --- */
-        #toolbar::-webkit-scrollbar {
-            width: 6px
-        }
-
-        #toolbar::-webkit-scrollbar-thumb {
-            background: #c4c4c4;
-            border-radius: 3px
-        }
     </style>
 </head>
 
 <body>
-    <!-- toolbar -->
     <aside id="toolbar">
-        <h3 style="font-size:18px;margin-bottom:6px;color:#343a40;">TOOLS</h3>
-
+        <h3>TOOLS</h3>
         <div class="btn active" data-tool="select">선택 (V)</div>
         <div class="btn" data-tool="circle">원 (C)</div>
         <div class="btn" data-tool="rect">사각형 (R)</div>
         <div class="btn" data-tool="text">텍스트 (T)</div>
 
-        <h3 style="font-size:18px;margin:14px 0 6px;color:#343a40;">TEXT</h3>
+        <h3>TEXT</h3>
         <select id="fontSelect" class="btn">
             <option value="1">Font 1</option>
             <option value="2">Font 2</option>
@@ -139,15 +148,16 @@
             <option value="5">Font 5</option>
             <option value="6">Font 6</option>
         </select>
-        <input id="fontSize" type="number" class="btn" value="20" min="8" max="100" />
+        <input id="fontSize" type="number" class="btn" min="8" max="100" value="20" />
 
-        <h3 style="font-size:18px;margin:14px 0 6px;color:#343a40;">PALETTE</h3>
+        <h3>PALETTE</h3>
         <div id="palette"></div>
+
+        <h3>SAVE</h3>
+        <div id="savePng" class="btn">PNG 저장</div>
     </aside>
 
-    <!-- p5 canvas -->
-    <div id="canvas-container"></div>
-
+    <div id="canvas-wrap"></div>
     <script src="logo.js"></script>
 </body>
 
