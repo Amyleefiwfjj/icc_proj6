@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Figma-like Design Tool with p5.js</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+        }
+
+        #ui {
+            width: 200px;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+
+        #canvas-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .shape-button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .shape-button:hover {
+            background: #0056d2;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ui">
+        <div class="shape-button" onclick="selectShape('circle')">Circle</div>
+        <div class="shape-button" onclick="selectShape('rectangle')">Rectangle</div>
+    </div>
+    <div id="canvas-container">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+        <script src="./logo.js">
+
+        </script>
+    </div>
+</body>
+
+</html>
